@@ -16,6 +16,9 @@
     <bean id="popMusic"
           class="ru.basov.springcourse.springapp1.PopMusic">
     </bean>
+    <bean id="rapMusic"
+          class="ru.basov.springcourse.springapp1.RapMusic">
+    </bean>
     <bean id="musicPlayer"
           class="ru.basov.springcourse.springapp1.MusicPlayer">
 
@@ -24,6 +27,7 @@
             <ref bean= "rockMusic"/>
             <ref bean= "classicalMusic"/>
             <ref bean= "popMusic"/>
+            <ref bean= "rapMusic"/>
         </list>
         </property>
     </bean>
