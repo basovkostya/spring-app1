@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="rockMusic"
+          class="ru.basov.springcourse.springapp1.RockMusic">
+    </bean>
+    <bean id="classicalMusic"
+          class="ru.basov.springcourse.springapp1.ClassicalMusic">
+    </bean>
+    <bean id="popMusic"
+          class="ru.basov.springcourse.springapp1.PopMusic">
+    </bean>
+    <bean id="musicPlayer"
+          class="ru.basov.springcourse.springapp1.MusicPlayer">
+
+        <property name="musicList">
+        <list>
+            <ref bean= "rockMusic"/>
+            <ref bean= "classicalMusic"/>
+            <ref bean= "popMusic"/>
+        </list>
+        </property>
+    </bean>
+
+</beans>
