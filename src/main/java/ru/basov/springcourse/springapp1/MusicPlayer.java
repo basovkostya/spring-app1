@@ -2,6 +2,7 @@ package ru.basov.springcourse.springapp1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,21 +11,18 @@ import java.util.Random;
 
 @Component
 public class MusicPlayer {
-    List<Music> musicList = new ArrayList<>();
-
+    List<Music> musicList;
+    @Value("${musicPlayer.name}")
     private String name;
+    @Value("${musicPlayer.volume}")
     private int volume;
-    private Music music1;
-    private Music music2;
-    @Autowired
-    public MusicPlayer(@Qualifier("classicalMusic")Music music1,@Qualifier("rockMusic") Music music2) {
-        this.music1 = music1;
-        this.music2 = music2;
-    }
 
-    public void setMusicList(List<Music> musicList) {
+
+    public MusicPlayer(List<Music> musicList) {
         this.musicList = musicList;
     }
+
+
     public String getName() {
         return name;
     }
@@ -41,16 +39,11 @@ public class MusicPlayer {
         this.volume = volume;
     }
 
-    public void playMusic(MusicType musicType){
+    public void playMusic(){
         Random random = new Random();
         int randomNumber  = random.nextInt(3);
+        System.out.println(musicList.get(randomNumber).getSong());
 
-        if (musicType == MusicType.CLASSICAL){
-            System.out.println(music1.getSongs().get(randomNumber));
-        }
-        else {
-            System.out.println(music2.getSongs().get(randomNumber));
-        }
 
     }
 }
