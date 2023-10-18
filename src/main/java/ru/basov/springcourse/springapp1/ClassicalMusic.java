@@ -9,6 +9,11 @@ import java.util.List;
 
 @Component("classicalMusic")
 public class ClassicalMusic implements Music{
+    private MusicType musicType = MusicType.CLASSICAL;
+
+    public MusicType getMusicType() {
+        return musicType;
+    }
 
     @Override
     public List<String> getSongs() {

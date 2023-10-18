@@ -1,8 +1,8 @@
 package ru.basov.springcourse.springapp1;
 
-public class PopMusic implements Music{
+public class PopMusic{
 
-    @Override
+
     public String getSong() {
         return "Shakira";
     }
