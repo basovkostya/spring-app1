@@ -7,33 +7,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="rockMusic"
-          class="ru.basov.springcourse.springapp1.RockMusic">
-    </bean>
-    <bean id="classicalMusic"
-          class="ru.basov.springcourse.springapp1.ClassicalMusic">
-    </bean>
-    <bean id="popMusic"
-          class="ru.basov.springcourse.springapp1.PopMusic">
-    </bean>
-    <bean id="rapMusic"
-          class="ru.basov.springcourse.springapp1.RapMusic">
-    </bean>
-    <bean id="dansMusic"
-          class="ru.basov.springcourse.springapp1.DansMusic">
-    </bean>
-    <bean id="musicPlayer"
-          class="ru.basov.springcourse.springapp1.MusicPlayer">
-
-        <property name="musicList">
-        <list>
-            <ref bean= "rockMusic"/>
-            <ref bean= "classicalMusic"/>
-            <ref bean= "popMusic"/>
-            <ref bean= "rapMusic"/>
-            <ref bean= "dansMusic"/>
-        </list>
-        </property>
-    </bean>
+    <context:component-scan base-package="ru.basov.springcourse.springapp1"/>
 
 </beans>
