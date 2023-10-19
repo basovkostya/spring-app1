@@ -2,6 +2,7 @@ package ru.basov.springcourse.springapp1.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,8 +14,10 @@ import java.net.http.HttpRequest;
 public class FirstController {
     @GetMapping("/hello")
     public String helloPage(@RequestParam(value = "name", required = false) String name,
-                            @RequestParam(value = "id", required = false) String id){
-                System.out.println("Name= "+name+" id= "+id);
+                            @RequestParam(value = "id", required = false) String id,
+                            Model model){
+                //System.out.println("Name= "+name+" id= "+id);
+        model.addAttribute("message", "Hello "+name+" id= "+id  );
         return "first/hello";
     }
     @GetMapping("/goodbye")
