@@ -1,9 +1,6 @@
 package ru.basov.springcourse.springapp1.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class Person {
 
@@ -19,12 +16,16 @@ public class Person {
 
     @Min(value=0, message="Invalid value")
     private int age;
+    //Страна, Город, Индекс (6 цифр)
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "You address should be in this format")
+    private String address;
 
-    public Person(int id, String name , int age, String email) {
+    public Person(int id, String name, int age, String email, String address) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.age = age;
+        this.address = address;
     }
 
     public Person() {
@@ -60,5 +61,13 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
