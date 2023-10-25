@@ -2,17 +2,14 @@ package ru.basov.springcourse.springapp1.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.basov.springcourse.springapp1.dao.BookDAO;
 import ru.basov.springcourse.springapp1.dao.PersonDAO;
 import ru.basov.springcourse.springapp1.models.Book;
+import ru.basov.springcourse.springapp1.models.Person;
 
 @Controller
 @RequestMapping("/books")
@@ -36,10 +33,33 @@ public class BooksController {
     }
     @PostMapping
     public String create(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult){
-        if (bindingResult.hasErrors())
+            if (bindingResult.hasErrors())
             return "books/new";
 
         bookDAO.save(book);
+        return "redirect:/books";
+    }
+    @GetMapping("/{id}")
+    public String show(@PathVariable("id") int id, Model model){
+        model.addAttribute("book", bookDAO.show(id));
+        return "books/show";
+    }
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") int id, Model model){
+        model.addAttribute("book", bookDAO.show(id));
+        return "books/edit";
+    }
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
+                         @PathVariable("id") int id){
+        if (bindingResult.hasErrors())
+            return "people/edit";
+        bookDAO.update(id, book);
+        return "redirect:/books";
+    }
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id){
+        bookDAO.delete(id);
         return "redirect:/books";
     }
 }

@@ -4,47 +4,46 @@ import jakarta.validation.constraints.*;
 
 public class Person {
 
-    private int person_id;
+    private int id;
 
-    @NotEmpty(message="Field do not empty")
-    @Size(min=2, max=20, message="Value should be has from 2 to 20")
-    private String name;
-
-    @Min(value=1900, message="Invalid value")
-    private int year_of_birth;
+    @NotEmpty(message="Поле не должно быть пустым")
+    @Size(min=2, max=20, message="Допустимое кол-во символов должно быть от 2 до 20")
+    private String fullName;
 
 
-    public Person(int person_id, String name, int year_of_birth) {
-        this.person_id = person_id;
-        this.name = name;
-        this.year_of_birth = year_of_birth;
+    @Min(value=1900, message="Значение должно быть >= 1900")
+    private int yearOfBirth;
 
+
+    public Person(String fullName, int yearOfBirth) {
+        this.fullName = fullName;
+        this.yearOfBirth = yearOfBirth;
     }
 
     public Person() {
     }
 
-    public int getPerson_id() {
-        return person_id;
+    public int getId() {
+        return id;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public int getYear_of_birth() {
-        return year_of_birth;
+    public int getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setYear_of_birth(int year_of_birth) {
-        this.year_of_birth = year_of_birth;
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 }

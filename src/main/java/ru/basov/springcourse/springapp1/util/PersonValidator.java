@@ -22,8 +22,8 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
-        if(personDAO.show(person.getName()).isPresent())
-            errors.rejectValue("name", "", "This name is already taken");
+        if(personDAO.show(person.getFullName()).isPresent())
+            errors.rejectValue("fullName", "", "Имя должно быть уникальным");
     }
     //посмотреть , есть ли человек с таким же имейлом в БД
 }

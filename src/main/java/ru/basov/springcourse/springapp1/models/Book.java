@@ -8,23 +8,20 @@ import org.springframework.stereotype.Component;
 public class Book {
     private int id;
 
-    private int person_id;
+    @NotEmpty(message = "Поле не должно быть пустым")
+    @Size(min=2, max=100, message="Допустимое кол-во символов от 2 до 100")
+    private String title;
 
     @NotEmpty(message = "Поле не должно быть пустым")
     @Size(min=2, max=100, message="Допустимое кол-во символов от 2 до 100")
-    private String name;
+    private String author;
 
-    @NotEmpty(message = "Поле не должно быть пустым")
-    @Size(min=2, max=100, message="Допустимое кол-во символов от 2 до 100")
-    private String authorName;
-
+    @Min(value = 1600, message = "Минимальная дата должна быть 1600")
     private int year;
 
-    public Book(int id, int person_id, String name, String authorName, int year) {
-        this.id = id;
-        this.person_id = person_id;
-        this.name = name;
-        this.authorName = authorName;
+    public Book( String title, String author, int year) {
+        this.title = title;
+        this.author = author;
         this.year = year;
     }
 
@@ -39,28 +36,20 @@ public class Book {
         this.id = id;
     }
 
-    public int getPerson_id() {
-        return person_id;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getName() {
-        return name;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public int getYear() {

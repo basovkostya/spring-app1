@@ -5,18 +5,18 @@
     <title>Edit Person</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/people/{person_id}(person_id=${person.getPerson_id() })}" th:object="${person}">
-    <label for="name">Enter name</label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+    <label for="title">Введите название книги</label>
+    <input type="text" th:field="*{title}" id="title"/>
+    <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name error</div>
     <br/>
-    <label for="email">Enter email</label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <label for="author">Введите автора</label>
+    <input type="text" th:field="*{author}" id="author"/>
+    <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Email error</div>
     <br/>
-    <label for="age">Enter age</label>
-    <input type="text" th:field="*{age}" id="age"/>
-    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+    <label for="year">Введите год</label>
+    <input type="text" th:field="*{year}" id="year"/>
+    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year error</div>
     <br/>
     <input type="submit" value="Update"/>
 </form>

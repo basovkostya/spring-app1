@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.basov.springcourse.springapp1.models.Book;
+import ru.basov.springcourse.springapp1.models.Person;
 
 import java.util.List;
 
@@ -17,10 +18,22 @@ private final JdbcTemplate jdbcTemplate;
     }
 
     public List<Book> index(){
-        return jdbcTemplate.query("select * from book", new BeanPropertyRowMapper<>(Book.class));
+        return jdbcTemplate.query("SELECT * FROM Book", new BeanPropertyRowMapper<>(Book.class));
     }
     public void save(Book book){
-        jdbcTemplate.update("insert into Book(name, author_name, year) values(?, ?, ?)",
-                book.getName(), book.getAuthorName(), book.getYear());
+        jdbcTemplate.update("INSERT INTO Book(title, author, year) VALUES(?, ?, ?)",
+                book.getTitle(), book.getAuthor(), book.getYear());
+    }
+    public void update(int id, Book book){
+        jdbcTemplate.update("UPDATE Book SET title=?, author=?, year=? WHERE id=?",
+                book.getTitle(), book.getAuthor(), book.getYear(), id);
+    }
+    public Book show(int id){
+        return jdbcTemplate.query("SELECT * From Book WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Book.class))
+                .stream().findAny().orElse(null);
+    }
+    public void delete(int id){
+
+        jdbcTemplate.update("DELETE FROM Book WHERE id=?", id);
     }
 }
