@@ -4,39 +4,32 @@ import jakarta.validation.constraints.*;
 
 public class Person {
 
-    private int id;
+    private int person_id;
 
     @NotEmpty(message="Field do not empty")
     @Size(min=2, max=20, message="Value should be has from 2 to 20")
     private String name;
 
-    @NotEmpty(message = "Field do not empty")
-    @Email(message = "No valid email")
-    private String email;
+    @Min(value=1900, message="Invalid value")
+    private int year_of_birth;
 
-    @Min(value=0, message="Invalid value")
-    private int age;
-    //Страна, Город, Индекс (6 цифр)
-    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "You address should be in this format")
-    private String address;
 
-    public Person(int id, String name, int age, String email, String address) {
-        this.id = id;
+    public Person(int person_id, String name, int year_of_birth) {
+        this.person_id = person_id;
         this.name = name;
-        this.email = email;
-        this.age = age;
-        this.address = address;
+        this.year_of_birth = year_of_birth;
+
     }
 
     public Person() {
     }
 
-    public int getId() {
-        return id;
+    public int getPerson_id() {
+        return person_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
     }
 
     public String getName() {
@@ -47,27 +40,11 @@ public class Person {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public int getYear_of_birth() {
+        return year_of_birth;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setYear_of_birth(int year_of_birth) {
+        this.year_of_birth = year_of_birth;
     }
 }
