@@ -7,8 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.basov.springcourse.springapp1.dao.PersonDAO;
+import ru.basov.springcourse.springapp1.models.Book;
 import ru.basov.springcourse.springapp1.models.Person;
 import ru.basov.springcourse.springapp1.util.PersonValidator;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/people")
@@ -29,6 +33,12 @@ public class PeopleController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model){
         model.addAttribute("person", personDAO.show(id));
+        List<Book> books= personDAO.getBook(id);
+        if(!books.isEmpty()){
+            model.addAttribute("books", personDAO.getBook(id));
+        }else{
+            model.addAttribute("notBooks", "");
+        }
         return "people/show";
     }
     @GetMapping("/new")

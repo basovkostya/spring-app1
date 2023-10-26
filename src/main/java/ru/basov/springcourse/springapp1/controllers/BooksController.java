@@ -11,6 +11,8 @@ import ru.basov.springcourse.springapp1.dao.PersonDAO;
 import ru.basov.springcourse.springapp1.models.Book;
 import ru.basov.springcourse.springapp1.models.Person;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/books")
 public class BooksController {
@@ -40,8 +42,13 @@ public class BooksController {
         return "redirect:/books";
     }
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model){
+    public String show(@PathVariable("id") int id, @ModelAttribute("person") Person person, Model model){
         model.addAttribute("book", bookDAO.show(id));
+        Optional<Person> getPerson = bookDAO.getPerson(id);
+        if(getPerson.isPresent()){
+        model.addAttribute("owner", getPerson.get());}
+        else{
+        model.addAttribute("people", personDAO.index());}
         return "books/show";
     }
     @GetMapping("/{id}/edit")
@@ -52,6 +59,7 @@ public class BooksController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
                          @PathVariable("id") int id){
+
         if (bindingResult.hasErrors())
             return "people/edit";
         bookDAO.update(id, book);
@@ -61,5 +69,15 @@ public class BooksController {
     public String delete(@PathVariable("id") int id){
         bookDAO.delete(id);
         return "redirect:/books";
+    }
+    @PatchMapping("/{id}/release")
+    public String release(@PathVariable("id") int id){
+        bookDAO.release(id);
+        return "redirect:/books/"+id;
+    }
+    @PatchMapping("/{id}/select")
+    public String select(@ModelAttribute("person") Person person, @PathVariable("id") int id){
+        bookDAO.selectPerson(id, person);
+        return "redirect:/books/"+id;
     }
 }
